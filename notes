@@ -1,0 +1,125 @@
+WHAT NEEDS TO BE DONE:
+
+----------------home page------------------------------
+1) create the nav bar with navigation to the check out
+2)Create the image carousel components
+3)tests
+
+----------------individual cards-----------------------
+1) create the  idividual  image card carousel
+2) add reviews
+3) add a buy button
+4)tests
+
+----------------checkout-------------------------------
+1) create a form that has all the orders
+2) add a remove order function
+3)tests
+4) launch
+
+
+- so the first thing that is going to be create is the navbar, I will create that with material ui
+
+
+
+MATERIAL UI:
+- material ui needs to be installed
+- so it looks like material ui has already styled components and then to alter them we can pass props, we can find out
+what these props are on the docs.
+- the Roboto font will not be automaticall loaded by Material-ui. so we have to put a link to the google font in our
+index.html
+- we add the recommended responsive meta tag to our header.
+- there is also an optional css reset. you import CssBaseline  and then put it imbetween a react Fragement but I do not
+know what A React Fragement is so, I will have to read up on it.
+
+REACT FRAGMENTS:
+- it is common for a React component to return multiple elements. Fragments let us group a list of children without adding
+extra nodes to the dom. so then what is the dom and what are nodes
+the dom: it connects web pages to scripts or programming languages by representing the structure of a document.The DOM
+represents a document with a logical tree, each branch of the tree ends in a node, each node contains objects. DOM methods
+allow programmatic access to the tree. with those nodes we can change the document's structure, style and content.
+- so the DOM basically represents the page so that we can change the document structure, style and content. the DOM represents the
+document as nodes and objects, that way, programming languages can connect to the page. so the dom is basically just
+a big object that allows us to interat with the web page. nodes are just elements inside the DOM that we can grab on to and
+manipulate.
+
+- so when it says that React Fragments lets us group children without adding extra nodes to the DOM, it is saying that we
+are getting structure for free and no space is being added to the DOM
+
+ok so just to be clear what is a component in react: components are what lets us split up the code into more reuseable parts
+what are elements in react: they are the smallest building block of React apps, an element describes what you
+want to see on the screen. elements are what components are made of. React elements are immutable
+
+
+THEMING:
+- so we can customize material-UI with our own theme, themes let us applu a consistent tone to our app. by default
+we get to choose from light and dark themes and initialy the light theme is used for us.
+- if we wan to customize a theme we need to provide a ThemeProvider component in order to inject a theme into our
+application
+- when changing the theme we need to make sure that the themeProvider component is a parent component of the component
+that we are trying to change the theme on, this is the only way that it will work.
+
+OVER RIDING COMPONENTS:
+there are 5 ways that components can be changed
+1) specific variation for a one-time situation
+2)synamic variation for a one-time situation
+3)specific variation of a component
+4)material design variation
+5) global theme variation
+
+1)
+-so when we want to customize the navbar component we want to over ride somethings, we wont use themeing, that is for
+styles, we need to
+-so by the sounds of things we want to make a specific cariation for a one-time situation, so making one change to one
+component
+
+- the first wat to override the style of a component is to use class names, every component provides a className property
+which is always applied to the root element
+- one way to override is to use the withStyles() higher-order component to inject custom styles into the DOM, and to pass
+the class name to the ClassNames component via its classes ptoperty
+
+-so basically we use a higher order component called withStyles() to inject css styles into the DOM and pass the className
+to the component via its props
+-so we are injecting styles into the DOM via HOF(withStyles), then we pass the className to the component via props
+-so I think I understand, I just need to figure out what styles I want to send them
+- our NavBar just uses the AppBar.
+
+- so what I want to do is override the styles so that I can make it so the checkout and home button are in the middle of
+the navbar. The outer container that is holding them is in display flex, so I need to read more about that.
+-so in our case the reason that it is displayed the way that it is, is because the h6 element is has a width of almost the
+entire page, so I need to override this. so It doesnt appear to be the width but lets just start with that and see if
+we can override it.
+-so we will use the HOF(withStyles) to inject styles of the highest specificity to override the current styles.
+- we then pass this new className to our component via the props system
+- there is a weird little dependency called clsx, that is used for creating className strings conditionaly
+
+- so the first thing that we do is create the styles, which will be created in an object called styles, that object
+will have a property called, root that will calso be an object. The root object will have the styles on it.
+- so it looks like the HOF withStyles does a little magic with the styles and the component
+- so it injects the styles that we have written to the DOM and then it passes the className to the component via its
+classes property
+- so the withStyles HOF injects the styles into the DOM, then it passess the wanted class name to the component via the
+classes prop
+
+- there is also a children prop and I am not sure what it does.
+
+children: sometimes a component doesnt know their children ahead of time. When that is the case, the special children
+prop is used to pass children elements directly into their output. so when you use children in a component it means
+that anything that is put between that componnets tags  are going to be rendered inside of it. So anything that is
+passed between the opening and closing tag of the component tag is going to added to props as a child prop
+
+- I actually already see that the NavBar is being styled with classes so I might as well just use thos classes
+
+- so when the className property from material ui isnt enouhg we can take advantage of the classes object property
+to customize all the css injected by Material-ui for a given component.
+-so there seems to be alot of  style HOF and I will have to read more about them, because I have no idea what they are
+about.
+
+- so makeStyle is a hook generator that allows the creation of multiple style rules per style sheet. Each style rule has its own class name
+- the class names are provided to the component with the classes varible. This is particularly useful when styling
+nested elements in a component.
+- so I think I got what I wanted and all I had to do was just over ride somethings, three hours of stufy for 5 mins of code
+
+
+FLEXBOX:
+- so when something is in display flex, it enables a flex context for all its direct children
