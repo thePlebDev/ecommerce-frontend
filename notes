@@ -1,9 +1,10 @@
 WHAT NEEDS TO BE DONE:
 
 ----------------home page------------------------------
-1) create the nav bar with navigation to the check out
-2)Create the image carousel components
-3)tests
+1) create the nav bar with navigation to the check out, with react router. (DONE)
+2)tests
+3)Create the image carousel components
+4)tests
 
 ----------------individual cards-----------------------
 1) create the  idividual  image card carousel
@@ -120,6 +121,90 @@ about.
 nested elements in a component.
 - so I think I got what I wanted and all I had to do was just over ride somethings, three hours of stufy for 5 mins of code
 
+- now I should really read up more on the REACT router
 
-FLEXBOX:
-- so when something is in display flex, it enables a flex context for all its direct children
+REACT ROUTER:
+-so react router helps us create single page applications but what are single page applciations, I should read up on that
+
+- so a SPA ia an application that re-renders its content in response to navigation actions without making a request to the server
+to fetch new HTML
+- single page apps rely on a router. routers are made up of routes, which describe the location that they should match
+
+
+
+HOW BROWSERS HANDLE LOCATIONS:
+- each browser tab has a "browser context". the Browsing context maintains a "session history", which is essentially
+an array of location entries.
+- so basically the sessions storage keeps track of your past history
+- when a browser navigates, a request is sent to a server and the browser uses the response to create a DOM
+- as you click links and navigate through pages, the browser tab is building up a session history. each navigation
+makes a request to a server and creates a new entry, including a new DOM
+
+
+THE HISTORY API:
+-it just provides an object that we can use useful methods and properties that let us nivigate back and forth through
+the user's history, and manipulate the contents of the history stack.
+- instead of creating a new DOM for every location the Histoy API re-uses the active DOM by updating it to reflect the
+new location.
+
+
+REACT ROUTER:
+-when starting a new project, you need to determine which type of router to use. For browser based projects there are
+<BrowserROuter> and <HashRouter> components.
+- we should use BrowserROuter when our server will handle dynamic requests (know how to respond to any possible URL)
+- HashRouter should be used for static websites(where the server can only respond to requests for filed  that is knows about )
+
+- each router creates a history object. which
+- the ROuter component only expects to recieve a single child element. so we wrap our App component with the router
+tag
+
+- so the route component is the main building block of React Router. Anywhere that we want to only render content based
+on the location's pathname. We will use a <Route> element. the Route expects a path property and where that path
+specifies the route will render a React component. we can use a <switch> component to groupd the <Routes> but the
+switch will iterate over its children elements (the routes) and only render the first one that matches the current pathname
+
+- so we create a <Switch/> element and then inside the elemnet tags we place all of our Route components and have them. render a path
+as well as a component prop
+
+-it can be useful to group routes that share a common prefix in the same component
+
+PATH PARAMS:
+- when there is a varible in a pathname that we want to capture, we use a path param, a path param being /roster/:number
+it will capture whatever is in the number position and it will be stored in the props.match.params of the component
+
+- we use the Link component to act as our anchor tag, when clicked it will update the URL and render the content that
+we specified but without reloading the page. we have to provide a 'to' prop to the link with the path name so it knows
+where to go when the link is clicked
+
+- ok so now I begin implementing the react router, first I have to download it, then I have to wrap my app component with the Router, but why
+- so we will wrap our app component inside of a BrowserROuter, the router can only have one component inside of it
+and each router will create a history object. this history object will be used to keep track of the curent location
+and re-render the website whenever that changes. Other components provided by react Router rely on having that history
+object avilable through react's context, so they must be rendered as descendants of a router componnent. if a React Router
+component that does not have a router as one of its ancestors will fail to work.
+-we are using BrowserRouter because we are using a server that handles dynamic requests.
+
+-so an application server will have a web framework running on top of it. For example, a Node application server
+might be running Express. so basically a application server will have a framework running on the backend. That framework
+is able to match requests and dynamically generate responses
+
+- so the reason that we have to wrap our component with the router is becasue of the history object that the rest of the COMPONENTS
+rely on.
+- so now we have to create our routes . so routes can be created anywhere but often it makes sense to render them in the same place
+- we can use the <Switch> component to gorup <Route>s. The <Switch/> will iterate overs its children elements(the routes) and
+only render the first one that matches the current pathname.
+- ok so basically we just use switch to group our routes and then the switch component will iterate over all the children
+and only render the first one the matches the current path.
+
+- ok so now we need to go into the app component and wrap everything we want to render in the switch component
+
+-so now that we have our switch component we need to add the individual Routes. The Route will render our component, and we
+can even pass it a function if we need it to give a component more props
+- since we dont have any extra props to pass to our components we will just use the component prop and not the render one
+
+- we have to put the exact prop on the route that has the path to the home page so that it only matches that path
+when it is exactly / and not /home
+
+- so now I need links. I just provide the 'to' prop and state the url that it is going to and
+- so now I will push to git hub
+- then I will put into play the basic tests and then I will make simple tests and then push again

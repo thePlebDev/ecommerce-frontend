@@ -1,7 +1,9 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Switch,Route } from 'react-router-dom';
 
-import NavBar from '../NavBar'
+import NavBar from '../NavBar';
+import Home from '../Home';
+import Checkout from '../Checkout';
 import './index.css'
 
 
@@ -10,6 +12,10 @@ const App = ()=>{
   return(
     <div>
       <NavBar />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route path='/checkout' component={Checkout} />
+      </Switch>
     </div>
   )
 }
