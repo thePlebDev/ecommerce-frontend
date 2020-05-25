@@ -204,7 +204,190 @@ can even pass it a function if we need it to give a component more props
 
 - we have to put the exact prop on the route that has the path to the home page so that it only matches that path
 when it is exactly / and not /home
+- we can also create an error page but just providing a <Route> component with no path
 
 - so now I need links. I just provide the 'to' prop and state the url that it is going to and
 - so now I will push to git hub
 - then I will put into play the basic tests and then I will make simple tests and then push again
+
+
+TESTING NOTES:
+
+- the import statement: the import statement is used to inport read only live bindings which are exported from another
+module.  imported modules are in strict mode
+ok so what is strict mode
+strict mode: is a way to opt in to a restricted variant of Javasript and opting-out of "sloppy mode". browsers that do
+not support strict mode will run strict mode code differently, so make sure to add feature testing
+strict mode does this: eliminates some Javascript silent error by changing them to throw errors,fixes mistakes that make it
+difficult for Javascript engines to perform optimizations: strict mode code can sometimes be made to run faster than
+identical code that's not strict mode, prohibits some syntax likely to be defined in future versions
+- so basically it is a way to make javascript a little better an more defined as a language
+
+export:
+- is used when creating javascript modules to export live bindings to functions, objects, or primative values form the module
+so they can be used by other programs with the import statement. there are two different types of export, named and defualt
+- we can have multiple named exports per module but only one default export
+
+code orginization:
+- if we have any constants we should organize them into a folder all by themselves
+- why we name everything index.js? this is a node.js thing,the index file is the entry point to a module
+
+- so you always want to make your index.js the point for entry. so if you have multiple button components, you want to be
+able to access them through the index.js file. instead of import submitButton from buttons/submitButtom
+- the proper convention would be. import {submitButton} from buttons. so we would have the button folder and then
+we would have the index.js file inside of that folder along with all of the specific button components. We then export those buttons
+from there files and import them into the index.js where we do a named export on them.
+- so basically we should just always remember that index.js should always be the point of entry.
+
+PROPSTYPES:
+-all the prop types that we passed from a parent component to a child component get validated based on the PropTypes
+interfaces assignd to the child component. we can make all of our componnets type safe with PropTypes
+- so first we have to impoer propTypes
+- when an invalid value is provided for a prop, a warning will be shown in the Javascript console.For performance
+reasons, propTYpes is only checked in development mode
+- we can define default values for your props by assigning to the special defaultProps
+- so basically to check our proptypes in development we go like this
+        componentName.propTypes = {
+        nameOfProp: PropType.validator
+        }
+
+- the validator can be any of the prop validators that React provides
+- for the moment in our application we do not need to do any prop validation.
+
+UNIT TESTING WITH ENZYME TESTING:
+- so first we have to install enzyme with react
+- enzyme introduces adapters that we will have to set up depending on the version of React that we use
+- so now we need to set up the adapter I think
+
+- so the first thing we will be running a shallow test
+- so the shallow rendering is usefull to constrian to testing the component as a unit and to ensure that the tests arent
+indirectly assertuung on behaviour of children components. it also doesnt call React lifecycle methods like componentDidMount
+
+-before we can start testing we need to create a setupTest.js file in our src folder, this is what is must of meant when it said,
+that this file had to be top level.
+-ok but what is an adapter. it lets us abstract away anything that changes based on the React version
+- unit testing is just testing one component at a time
+
+- snapshot testing, jest snapshots are like those old text UIs with windows and buttons made of text characters: it's a rendered output
+of your component stored in a text file.
+- jest will store snap shots of the code in in test files and will compare them when you update the code
+
+- so jest is the test runner that will run the tests, finding the test files running them an making a nice output in the terminal
+- enzyme is a library that is needed to test the react components
+
+- we create the setupTest.js folder and we have to set up the enzyme adapter, I think I have that done
+
+- so shallow rendering just to make sure that the component is rendering properly.
+-to make sure we are getting the app to render we are going to use the .fin() mehtod that enzyme provides us.
+- the find method takes a EnzymeSelector and this is just whatever we put as a css class inside of the component. It returns a new
+wrapper that wraps the found nodes.
+
+
+WHAT TO TEST:
+-testing anything that takes user input is a good idea
+
+1) it must render : at the very least, make sure the component renders without error
+
+2) test the output : make sure that it renders the correct thing. given certain props, what output is to be expected
+
+3) test the states: Every conditional should be accounted for. If the className are conditional(warning/success) make
+sure to test that the classNmae-deciding logic is working right. Likewise for conditionally rendered children: if a logout
+button is only visible when the user is logged in, make sure to test that
+
+4) Test the events : if the component can be interacted with, button,onclick,onchange, test that the events works as
+expected and call the specified function with the correct arguments
+
+5) Test the edge cases: anything that operates on an array could have boundary cases.
+
+
+-when it comes down to testing there are two 'ends' of testing, which are unit testing and end to end testing.
+- an end to end test will be more focused on user interaction and dealing with inputs, events and the like.
+- unit testing of an application usually foucuses on the smallest units of an application, and generally aims to
+determine correctness, "does a function return the right value"
+
+- the standard tool for testing React applications is Jest. so jest is a little heavy for a begginer the guy is saying.
+so we will be using mocha and the React testing library called enzyme
+
+- mocha is a well known and flexible text runner that we can use to run our Javascript tests on the server
+- so I guess you can use enxyze to test React native too.
+-so for this testing enviroment we will be using babel and webpack
+
+What is babel:
+-ok so babel is a toolchain that is mainly used to convert ECMAScript 2015 + code into a backwards compatible
+version of javascript in current and older browsers or enviroments
+- so so basically it takes the new javascirpt code and turns it into old style code to make sure that older browsers
+can use it.
+
+What is webpack:
+-webpack is a module bundler. Webpack can take scar of bundling alongside a seperate task runner
+- so we installed babel-core and babel-loader
+- so babel-core, which is the core library of babel
+- the babel-loader is a loader plugin for Webpack
+- the rest of the libraries are presets for Babel that allow tuning and customization
+
+-so now we need to create a .babelrc folder in the root directory. the .babelrc file is the local configuration of our
+project. it will effect all files that Babel processes that are in the same directory so make sure it is in the root
+
+-so now we will set up the Webpack, which is a module bunding tool that we can use to ensure all of our different files get
+combined into one meaningful file we can use in the browser. Babael and Webpack both deserve there own tutorials
+
+WEBPACK:
+- the smallest project we can bundle with webpack consists of input and output. so when we use webpack, it traverses the
+imports constructing a dependency graph of the project and then generates output based on the configuration. a dependency
+graph is a directed graph that describes how nodes relate to eachother.
+
+
+TESTING WITH JEST AND ENZYME:
+- both jest and enzyme are specifically designed to test React applications, jest can be used with any other javascript
+app but only works with react
+- jest can be used without Enzyme but Enzyme simply adds additional functionality
+- enzyme can be used without Jest but it must be paired with another thes runner if jest is not used
+
+- so create react app already installs jest for us and I am pretty sure that we already have Enzyme installed but we
+still need to install enzyme-to-json
+
+-so this says that we need to update our package.json file since we downloaded the enzyme-to-json/serializer
+-enzyme-to-json provides a better component format for snapshot comparison that Enzymes internal component representation
+- it allows us to minimise code duplication when working with snapshots,so I guess this only applies to snapshot testing
+
+- so Jest will look for tests with .test.js as the suffix
+
+- so I think I installed a diffrent version of webpack and React is now yelling at me for it. so I don't think we need
+to install webpack when we use create react app
+- ya so under the hood React create-react-app uses Babel and webPack but we don't need to know anything about them.
+- so to use create-react-app we run npx, but what even is npx?
+- so npx simplifies things that were a bit harder in npm
+- npx lets you is good for calling things that need to be installed globally. this is great for things like create-react-app
+because the get updated to frequently npx allows us to install it locally each time we need to use it, so it will never
+be out of dat. it basically lets us install things without having them pollute the global namespace
+
+- when we run npm install just by its self it downloads dependencies defined in a package.json file and generates a
+node_modules folder with the installed modules.
+
+MOUNTING:
+- full DOM rendering including child components
+- this is ideal for use cases where we have components that may interact with DOM API or use React lifecycle
+methods in order to fully test the component
+- unmount should be called after each tests affecting each other
+- allows access to both props directly passed into the root component and props passed into child components
+
+
+SHALLOW:
+-renders only the dingle component, not including its children. This is useful to isolate the component
+for pure unit testing. It protects against changes or bugs in a child component altering the behavior or
+output of the component under test
+- shallow components do have access to lifecycle methods by default
+- cannot access props passed into the root component, but can those passed into child components and can test
+the effect of props passed into the root component. this is as with shallow(<Component/>), youre testing
+what Component renders, not the element we passed into shallow
+
+RENDER:
+-renders to static HTML including children
+- does not have access to React lifecycle methods
+- less costly than mount but provides less functionality
+
+- the snapshot file contains a layout that matches the name of the test
+- so on our get component we call getElements() and it returns the wrapped ReactElements and then we call .toMatchSnapshot() and that
+passes the test
+- so this seems like the basics for starting a react test. just need to render it and then see if it matches the snap shots.
+ 
